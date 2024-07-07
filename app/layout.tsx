@@ -1,5 +1,5 @@
-import styles from "./styles/layout.module.css";
-import StoreProvider from "./StoreProvider";
+import "./styles/globals.css";
+import ClientProviders from "./components/ClientProviders";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -19,10 +19,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={styles.container}>
-        <StoreProvider>
-          <main>{children}</main>
-        </StoreProvider>
+      <body>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );
