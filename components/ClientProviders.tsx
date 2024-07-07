@@ -3,9 +3,9 @@
 import { SessionProvider, useSession } from "next-auth/react";
 import { Provider as ReduxProvider } from "react-redux";
 import { useEffect } from "react";
-import { useAppDispatch } from "../../lib/hooks";
-import { login, logout } from "../../lib/features/auth/authSlice";
-import store from "../../lib/store";
+import { useAppDispatch } from "../lib/hooks";
+import { login, logout } from "../lib/features/auth/authSlice";
+import store from "../lib/store";
 
 interface ClientProvidersProps {
   children: React.ReactNode;

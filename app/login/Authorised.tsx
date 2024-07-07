@@ -1,7 +1,7 @@
 import { ComponentType, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useAppSelector } from "../../../lib/hooks";
+import { useAppSelector } from "../../lib/hooks";
 
 type WithAuthProps = {
   // Define any additional props you need for the HOC here
@@ -17,7 +17,7 @@ const Authorised = <P extends WithAuthProps>(
 
     useEffect(() => {
       if (status !== "loading" && (!isLoggedIn || !user?.isAdmin)) {
-        router.push("/admin-login");
+        router.push("/login");
       }
     }, [status, isLoggedIn, user]);
 

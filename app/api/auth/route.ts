@@ -43,6 +43,6 @@ export default NextAuth({
     },
   },
   pages: {
-    signIn: "/admin-login",
+    signIn: "/login",
   },
 });

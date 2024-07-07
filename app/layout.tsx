@@ -1,5 +1,5 @@
-import "./styles/globals.css";
-import ClientProviders from "./components/ClientProviders";
+import "../styles/globals.css";
+import ClientProviders from "../components/ClientProviders";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
