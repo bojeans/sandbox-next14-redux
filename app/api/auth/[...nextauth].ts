@@ -1,32 +1,45 @@
 import NextAuth from "next-auth";
-import Providers from "next-auth/providers";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
   providers: [
-    Providers.Credentials({
+    CredentialsProvider({
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      authorize: async (credentials) => {
-        // Replace this with your own authentication logic
-        const user = { id: 1, name: "Admin", email: credentials.email };
+      authorize: async (credentials, req) => {
         if (
-          credentials.email === "admin@example.com" &&
-          credentials.password === "password"
+          credentials &&
+          typeof credentials.email === "string" &&
+          typeof credentials.password === "string"
         ) {
-          return Promise.resolve(user);
-        } else {
-          return Promise.resolve(null);
+          // Replace this with your own authentication logic
+          const user = { id: "1", name: "Admin", email: credentials.email };
+          if (
+            credentials.email === "admin@example.com" &&
+            credentials.password === "password"
+          ) {
+            return Promise.resolve(user);
+          }
         }
+        return Promise.resolve(null);
       },
     }),
   ],
   callbacks: {
-    async session(session, user) {
-      session.user = user;
+    async session({ session, token }) {
+      if (token.user) {
+        session.user = token.user as typeof session.user;
+      }
       return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.user = user;
+      }
+      return token;
     },
   },
   pages: {
